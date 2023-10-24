@@ -14,9 +14,8 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const filteredEvents = (
-    (!type
-      ? data?.events
-      : data?.events) || []
+    // Comment: Si la variable Type n'est pas null, cela signifie qu'on a utilisé un filtre dans le select et donc on applique la fonction filter sur notre tableau d'évènements pour garder uniquement les évènements qui ont le même type que la valeur du select
+    (!type ? data?.events : data?.events.filter(event => event.type === type)) || []
   ).filter((event, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&
