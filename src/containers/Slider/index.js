@@ -8,13 +8,18 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    // Comment: changement du comparateur < en > pour inverser le tri des évènements du plus récent au plus ancien
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
   );
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
-      5000
-    );
+    // Ajout condition pour gérer l'erreur console (byDatedesc.lenght : undefined)
+    if (byDateDesc) {
+      setTimeout(
+        // Comment: Ajout "-1" pour gérer l'arrivée au bout du slider car il n'a que 3 images
+        () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+        5000
+      );
+    }
   };
   useEffect(() => {
     nextCard();
@@ -22,14 +27,15 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        // Comment: modification de la place de la key
+        <div key={event.title}>
           <div
-            key={event.title}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
           >
-            <img src={event.cover} alt="forum" />
+            {/* Ajout d'un alt unique */}
+            <img src={event.cover} alt={event.title} />
             <div className="SlideCard__descriptionContainer">
               <div className="SlideCard__description">
                 <h3>{event.title}</h3>
@@ -40,17 +46,19 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {/* Modification des param et de la key (key reste fixe, pas de key unique, erreur console) */}
+              {byDateDesc.map((bulletPoint, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={`radio-${bulletPoint.title}`}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  // index à la place de idx pour associer l'index au radioIdx
+                  checked={index === radioIdx}
                 />
               ))}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
