@@ -4,7 +4,7 @@ import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
-// modification du Timeour pour régler l'erreur du texte "Envoyer"
+// Comment: modification du Timeout pour régler l'erreur du texte "Envoyer"
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 600); })
 
 const Form = ({ onSuccess, onError }) => {
@@ -18,7 +18,7 @@ const Form = ({ onSuccess, onError }) => {
         await mockContactApi();
         setSending(false);
         onSuccess();
-        // ajout onSuccess pour ouvrir la modal si succès
+        // Comment: ajout onSuccess pour ouvrir la modal si succès
       } catch (err) {
         setSending(false);
         onError(err);

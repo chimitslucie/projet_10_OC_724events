@@ -13,9 +13,9 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  // modif récupération des données (useData renvoie data)
+  // Comment: modif récupération des données (useData renvoie data)
   const { data } = useData();
-  // fonction last trie les évts pour avoir l'évt le plus récent
+  // Comment: fonction last trie les évts pour avoir l'évt le plus récent
   const last = data?.events.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
   )[0];

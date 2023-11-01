@@ -12,7 +12,7 @@ const Slider = () => {
     new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
   );
   const nextCard = () => {
-    // Ajout condition pour gérer l'erreur console (byDatedesc.lenght : undefined)
+    // Comment: Ajout condition pour gérer l'erreur console (byDatedesc.lenght : undefined)
     if (byDateDesc) {
       setTimeout(
         // Comment: Ajout "-1" pour gérer l'arrivée au bout du slider car il n'a que 3 images
@@ -34,7 +34,7 @@ const Slider = () => {
               index === idx ? "display" : "hide"
             }`}
           >
-            {/* Ajout d'un alt unique */}
+            {/* Comment: Ajout d'un alt unique */}
             <img src={event.cover} alt={event.title} />
             <div className="SlideCard__descriptionContainer">
               <div className="SlideCard__description">
@@ -46,13 +46,13 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {/* Modification des param et de la key (key reste fixe, pas de key unique, erreur console) */}
+              {/* Comment: Modification des param et de la key (key reste fixe, pas de key unique, erreur console) */}
               {byDateDesc.map((bulletPoint, radioIdx) => (
                 <input
                   key={`radio-${bulletPoint.title}`}
                   type="radio"
                   name="radio-button"
-                  // index à la place de idx pour associer l'index au radioIdx
+                  // Comment: index à la place de idx pour associer l'index au radioIdx
                   checked={index === radioIdx}
                 />
               ))}
